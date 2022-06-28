@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class StudentRepositoryLameImpl implements StudentRepository{
+public class StudentRepositoryLameImpl{
 
     static List<Student> studentList;
 
@@ -22,17 +22,21 @@ public class StudentRepositoryLameImpl implements StudentRepository{
         studentList.add(studentMasha);
     }
 
-    @Override
     public List<Student> getAll() {
         return studentList;
     }
 
-    @Override
     public Optional<Student> findById(int id) {
         for(Student student: studentList) {
             if (student.getId() == id)
                 return Optional.of(student);
         }
         return Optional.empty();
+    }
+
+    public void deleteById(int id) {
+        studentList = studentList.stream()
+                .filter(el -> el.getId() != id)
+                .toList();
     }
 }

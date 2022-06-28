@@ -1,7 +1,7 @@
 package org.learning.springbootTest.services;
 
 import org.learning.springbootTest.model.Student;
-import org.learning.springbootTest.repositories.StudentRepository;
+import org.learning.springbootTest.repositories.StudentRepositoryLameImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class StudentService {
 
     @Autowired
-    StudentRepository repository;
+    StudentRepositoryLameImpl repository;
 
     public List<Student> getAllStudents() {
         return repository.getAll();
@@ -25,5 +25,9 @@ public class StudentService {
         } else {
             throw new RuntimeException();
         }
+    }
+
+    public void deleteStudentById(int id) {
+        repository.deleteById(id);
     }
 }
