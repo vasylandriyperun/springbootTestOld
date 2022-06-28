@@ -1,21 +1,34 @@
 package org.learning.springbootTest.model;
 
+import com.sun.istack.NotNull;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "students")
 public class Student {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String surname;
 
-    public Student(int id, String name, String surname) {
-        this.id = id;
+    public Student() {}
+
+    public Student(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

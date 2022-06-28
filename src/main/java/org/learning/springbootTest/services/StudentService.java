@@ -1,7 +1,7 @@
 package org.learning.springbootTest.services;
 
 import org.learning.springbootTest.model.Student;
-import org.learning.springbootTest.repositories.StudentRepositoryLameImpl;
+import org.learning.springbootTest.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +12,13 @@ import java.util.Optional;
 public class StudentService {
 
     @Autowired
-    StudentRepositoryLameImpl repository;
+    StudentRepository repository;
 
     public List<Student> getAllStudents() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
-    public Student getStudentById(int id) {
+    public Student getStudentById(Long id) {
         Optional<Student> studentOptional = repository.findById(id);
         if (studentOptional.isPresent()) {
             return studentOptional.get();
@@ -27,7 +27,7 @@ public class StudentService {
         }
     }
 
-    public void deleteStudentById(int id) {
+    public void deleteStudentById(Long id) {
         repository.deleteById(id);
     }
 }
