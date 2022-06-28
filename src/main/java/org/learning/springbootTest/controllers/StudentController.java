@@ -4,6 +4,7 @@ import org.learning.springbootTest.model.Student;
 import org.learning.springbootTest.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,5 +18,10 @@ public class StudentController {
     @GetMapping(path = "/students")
     public List<Student> getStudents() {
         return studentService.getAllStudents();
+    }
+
+    @GetMapping(path = "/students/{id}")
+    public Student getStudentById(@PathVariable int id) {
+        return studentService.getStudentById(id);
     }
 }

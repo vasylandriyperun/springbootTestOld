@@ -5,12 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class StudentRepositoryLameImpl implements StudentRepository{
 
     static List<Student> studentList;
-
 
     static {
         studentList  = new ArrayList<>();
@@ -23,7 +23,16 @@ public class StudentRepositoryLameImpl implements StudentRepository{
     }
 
     @Override
-        public List<Student> getAll() {
-            return studentList;
+    public List<Student> getAll() {
+        return studentList;
+    }
+
+    @Override
+    public Optional<Student> findById(int id) {
+        for(Student student: studentList) {
+            if (student.getId() == id)
+                return Optional.of(student);
+        }
+        return Optional.empty();
     }
 }
