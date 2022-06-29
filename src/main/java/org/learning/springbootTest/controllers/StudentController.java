@@ -13,11 +13,6 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping(path = "/students")
-    public List<Student> getStudents() {
-        return studentService.getAllStudents();
-    }
-
     @GetMapping(path = "/students/{id}")
     public Student getStudentById(@PathVariable Long id) {
         return studentService.getStudentById(id);
@@ -37,6 +32,24 @@ public class StudentController {
     public void updateStudent(@PathVariable Long id,
                               @RequestBody Student student) {
         studentService.updateStudent(id, student);
+    }
+
+    @GetMapping(path = "/students")
+    public List<Student> getStudentByName(@RequestParam(required = false) String name,
+                                          @RequestParam(required = false) String surname) {
+        if (name == null) {
+            return studentService.getAllStudents();
+        } else if (surname == null) {
+            return studentService.getStudentsWithName(name);
+        } else {
+            return studentService.getStudentsWithNameAndSurname(name,surname);
+        }
+
+    }
+
+    @GetMapping(path = "/students/find")
+    public List<Student> getStudentsWithSurnameLike(@RequestParam String surnamePart){
+        return studentService.getStudentsWithSurnameLike(surnamePart);
     }
 
 }

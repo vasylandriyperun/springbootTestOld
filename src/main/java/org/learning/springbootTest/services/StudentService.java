@@ -43,4 +43,16 @@ public class StudentService {
         studentExisting.setSurname(student.getSurname());
         repository.save(studentExisting);
     }
+
+    public List<Student> getStudentsWithName(String name) {
+        return repository.findByName(name);
+    }
+
+    public List<Student> getStudentsWithNameAndSurname(String name, String surname) {
+        return repository.findByNameAndSurname(name, surname);
+    }
+
+    public List<Student> getStudentsWithSurnameLike(String surnamePart) {
+        return repository.findBySurnameLike(surnamePart);
+    }
 }
