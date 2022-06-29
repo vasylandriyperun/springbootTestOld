@@ -31,7 +31,16 @@ public class StudentService {
         repository.deleteById(id);
     }
 
-    public void createAndSaveStudent(Student student){
-        repository.save(student);
+    public void createAndSaveStudent(Student student) {
+        if (student.getId() == null
+                || !repository.existsById(student.getId()))
+            repository.save(student);
+    }
+
+    public void updateStudent(Long id, Student student) {
+        Student studentExisting = getStudentById(id);
+        studentExisting.setName(student.getName());
+        studentExisting.setSurname(student.getSurname());
+        repository.save(studentExisting);
     }
 }
