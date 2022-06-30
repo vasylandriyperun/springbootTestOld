@@ -1,5 +1,6 @@
 package org.learning.springbootTest.services;
 
+import org.learning.springbootTest.exception.WrongIdProvidedException;
 import org.learning.springbootTest.model.Student;
 import org.learning.springbootTest.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class StudentService {
         if (studentOptional.isPresent()) {
             return studentOptional.get();
         } else {
-            throw new RuntimeException();
+            throw new WrongIdProvidedException("Wrong Student Id provided. " +
+                    "Student with id=" + id + " doesn't exist");
         }
     }
 

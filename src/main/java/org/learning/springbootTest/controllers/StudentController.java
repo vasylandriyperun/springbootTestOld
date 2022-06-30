@@ -1,8 +1,12 @@
 package org.learning.springbootTest.controllers;
 
+import org.learning.springbootTest.dto.ExceptionResponse;
+import org.learning.springbootTest.exception.WrongIdProvidedException;
 import org.learning.springbootTest.model.Student;
 import org.learning.springbootTest.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +53,12 @@ public class StudentController {
     @GetMapping(path = "/students/find")
     public List<Student> getStudentsWithSurnameLike(@RequestParam String surnamePart) {
         return studentService.getStudentsWithSurnameLike(surnamePart);
+    }
+
+    @ExceptionHandler(WrongIdProvidedException.class)
+    public final ResponseEntity<ExceptionResponse> handleWrongIdException(WrongIdProvidedException ex) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
 }
