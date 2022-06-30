@@ -48,6 +48,10 @@ public class StudentService {
         return repository.findByName(name);
     }
 
+    public List<Student> getStudentsWithSurname(String surname) {
+        return repository.findBySurname(surname);
+    }
+
     public List<Student> getStudentsWithNameAndSurname(String name, String surname) {
         return repository.findByNameAndSurname(name, surname);
     }

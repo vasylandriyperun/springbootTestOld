@@ -37,18 +37,17 @@ public class StudentController {
     @GetMapping(path = "/students")
     public List<Student> getStudentByName(@RequestParam(required = false) String name,
                                           @RequestParam(required = false) String surname) {
-        if (name == null) {
-            return studentService.getAllStudents();
-        } else if (surname == null) {
+        if (name != null && surname != null)
+            return studentService.getStudentsWithNameAndSurname(name, surname);
+        if (surname != null)
+            return studentService.getStudentsWithSurname(surname);
+        if (name != null)
             return studentService.getStudentsWithName(name);
-        } else {
-            return studentService.getStudentsWithNameAndSurname(name,surname);
-        }
-
+        return studentService.getAllStudents();
     }
 
     @GetMapping(path = "/students/find")
-    public List<Student> getStudentsWithSurnameLike(@RequestParam String surnamePart){
+    public List<Student> getStudentsWithSurnameLike(@RequestParam String surnamePart) {
         return studentService.getStudentsWithSurnameLike(surnamePart);
     }
 

@@ -10,6 +10,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findByName(String name);
 
+    List<Student> findBySurname(String surname);
     List<Student> findByNameAndSurname(String name, String surname);
 
     @Query("SELECT st FROM Student st WHERE st.surname LIKE %?1%")
