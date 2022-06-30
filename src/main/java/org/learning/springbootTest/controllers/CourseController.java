@@ -1,7 +1,8 @@
 package org.learning.springbootTest.controllers;
 
 import org.learning.springbootTest.model.Book;
-import org.learning.springbootTest.services.BookService;
+import org.learning.springbootTest.model.Course;
+import org.learning.springbootTest.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,15 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class BookController {
+public class CourseController {
 
     @Autowired
-    BookService bookService;
+    CourseService courseService;
 
-    @GetMapping(path = "/books")
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    @GetMapping(path = "/courses")
+    public List<Course> getAllCourse() {
+        return courseService.getAllCourses();
     }
-
 
 }

@@ -1,5 +1,6 @@
 package org.learning.springbootTest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -12,6 +13,9 @@ public class Book {
     private Long id;
     @NotNull
     private String title;
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private Student owner;
 
     public Book() {
     }
@@ -35,5 +39,14 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @JsonIgnore
+    public Student getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Student owner) {
+        this.owner = owner;
     }
 }
